@@ -1,0 +1,132 @@
+<div>
+    <mat-grid-list cols="4" rowHeight="100">
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <button mat-raised-button color="primary" (click)="searchImages()" disabled>Wyszukaj zdjęcia do
+                produktów</button>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field>
+                <input matInput type="number" [(ngModel)]="saleDuration" placeholder="Czas wyświetlania (sek)">
+            </mat-form-field>
+            <span></span>
+            <button mat-raised-button color="primary" (click)="saveSettings()">Zapisz ustawienia</button>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-checkbox [(ngModel)]="selectedAll" (change)="selectAll()">Zaznacz wszystkie</mat-checkbox>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field appearance="outline" class="searchSize">
+                <mat-label>Szukaj produktu</mat-label>
+                <input matInput [(ngModel)]="searchValue" (keyup)="applyFilter($event.target.value)">
+                <button mat-button *ngIf="dataSource.filter" matSuffix mat-icon-button (click)="clearSearch()">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
+<div>
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+        <ng-container matColumnDef="index">
+            <th mat-header-cell *matHeaderCellDef> index </th>
+            <td mat-cell *matCellDef="let element" (click)="expandItem(element)"> {{element.index}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nazwa">
+            <th mat-header-cell *matHeaderCellDef> nazwa </th>
+            <td mat-cell *matCellDef="let element" (click)="expandItem(element)"> {{element.nazwa}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="hasImage">
+            <th mat-header-cell *matHeaderCellDef> Obrazek </th>
+            <td mat-cell *matCellDef="let element" (click)="expandItem(element)">
+                <div *ngIf="element.imageUrl">
+                    <font color="green">TAK</font>
+                </div>
+                <div *ngIf="!element.imageUrl">
+                    <font color="red">NIE</font>
+                </div>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="jm">
+            <th mat-header-cell *matHeaderCellDef> jm </th>
+            <td mat-cell *matCellDef="let element" (click)="expandItem(element)"> {{element.jm}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="cena">
+            <th mat-header-cell *matHeaderCellDef> cena </th>
+            <td mat-cell *matCellDef="let element" (click)="expandItem(element)"> {{element.cena | currency:'PLN'}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="rabat">
+            <th mat-header-cell *matHeaderCellDef> rabat </th>
+            <td mat-cell *matCellDef="let element" (click)="expandItem(element)"> {{element.rabat }}%
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="waznosc">
+            <th mat-header-cell *matHeaderCellDef> waznosc </th>
+            <td mat-cell *matCellDef="let element" (click)="expandItem(element)"> {{element.waznosc}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="promocja">
+            <th mat-header-cell *matHeaderCellDef> promocja </th>
+            <td mat-cell *matCellDef="let element" (click)="expandItem(element)">
+                <div *ngIf="element.promocja === true">
+                    TAK
+                </div>
+                <div *ngIf="element.promocja === false">
+                    NIE
+                </div>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="stan">
+            <th mat-header-cell *matHeaderCellDef> stan </th>
+            <td mat-cell *matCellDef="let element" (click)="expandItem(element)"> {{element.stan}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="state">
+            <th mat-header-cell *matHeaderCellDef> Wyświetlane </th>
+            <td mat-cell *matCellDef="let element">
+                <mat-checkbox [(ngModel)]="element.wyswietlane" (ngModelChange)="allItemsSelected()"></mat-checkbox>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+                <div class="item-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                    <div class="upload">
+                        <input type="file" accept="image/*" #file (change)="uploadFile(file.files, element.index)"
+                            style="display: none;">
+                        <button mat-raised-button color="primary" (click)="file.click()">Wgraj obrazek</button>
+                    </div>
+                    <span *ngIf="element.imageUrl">
+                        <button mat-raised-button color="primary" (click)="showImage(element.nazwa, element.imageUrl)">Zobacz obrazek</button>
+                        <span></span>
+                        <button mat-raised-button color="primary"
+                            (click)="deleteImage(element.index, element.nazwa)">Usuń
+                            obrazek</button>
+                    </span>
+                    <span *ngIf="progress > 0">
+                        {{ progress }}%
+                    </span>
+                    <span *ngIf="message">
+                        {{ message }}
+                    </span>
+                </div>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row"
+            [class.example-expanded-row]="expandedElement === element">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    </table>
+
+    <mat-paginator [length]="dataSource.data.length" [pageSize]="10" [pageSizeOptions]="[10,20,40,100]">
+    </mat-paginator>
+</div>

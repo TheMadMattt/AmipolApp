@@ -1,0 +1,42 @@
+<body>
+  <div *ngIf="displaySales && displaySales.length > 0 && currentItem" fxFlex>
+    <div class="saleElement" *ifChanges="currentItem" [@saleAnimation] fxFlex>
+      <div fxLayout="column" fxLayoutAlign="center center" fxFlex>
+        <div fxLayoutAlign="center center" fxFlex>
+          <div *ngIf="currentItem.imageUrl" fxLayoutAlign="center center">
+            <img [src]="currentItem.imageUrl" />
+          </div>
+          <div *ngIf="!currentItem.imageUrl" fxLayoutAlign="center center">
+            <img src="assets/noImage.png" width="500" />
+          </div>
+        </div>
+        <div fxFlexFill fxFlex="10%" fxLayoutAlign="center center">
+          <h3>Promocja: {{ promoNumber }} z {{ displaySales.length }} </h3>
+        </div>
+      </div>
+      <div fxLayout="column" fxFlex>
+        <div class="five" fxFlex fxFlexFill fxLayoutAlign="center center">
+          <h1 align="center">{{ currentItem.nazwa }}</h1>
+        </div>
+        <div fxLayout fxLayoutAlign="center center" fxFlex>
+          <div fxFlex fxFlexFill fxLayoutAlign="center center">
+            <div fxLayout="column">
+              <h2 align="center">Taniej o:</h2>
+              <h1 style="font-size: 70pt;" align="center">{{ roundDiscount(currentItem.rabat) }}%</h1>
+            </div>
+          </div>
+          <div fxFlex fxLayoutAlign="center center" fxFlexFill>
+            <div class="container">
+              <img src="assets/promo-star.png" style="max-height: 600px;">
+              <div class="centered">
+                <h1 style="font-size: 70pt;" align="center">
+                  {{ currentItem.cena | currency:'PLN' }}</h1>
+                <h1>/{{currentItem.jm}}</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

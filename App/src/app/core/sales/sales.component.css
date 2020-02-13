@@ -1,0 +1,64 @@
+.saleElement{
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+img {
+  max-width: 600px;
+}
+
+html, body {
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+div {
+  flex: 1;
+}
+
+h1 {
+  white-space: pre-wrap;
+  font-size: 60pt;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+}
+
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.centered {
+  color:black;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.one {
+  background-color: white;
+}
+
+.two {
+  background-color: white;
+}
+
+.three {
+  background-color: red;
+}
+
+.five {
+  background-color: white;
+}
