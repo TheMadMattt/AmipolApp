@@ -1,3 +1,4 @@
+import { SafePipe } from './pipe/safe.pipe';
 import { ImagePreviewDialogComponent } from './shared/image-preview-dialog/image-preview-dialog.component';
 import { MaterialModule } from './material.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -33,7 +34,8 @@ export function loadSettings(settingsService: SettingsService): () => void {
     IfChangesDirective,
     LoginComponent,
     ConfirmDialogComponent,
-    ImagePreviewDialogComponent
+    ImagePreviewDialogComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,
@@ -56,7 +58,6 @@ export function loadSettings(settingsService: SettingsService): () => void {
       multi: true
     }
   ],
-  bootstrap: [AppComponent],
-  entryComponents: [SpinnerComponent, ConfirmDialogComponent, ImagePreviewDialogComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

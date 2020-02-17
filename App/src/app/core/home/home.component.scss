@@ -1,0 +1,18 @@
+.mobile {
+    display: none;
+}
+
+@media only screen and (max-width: 500px) {
+
+    .mobile {
+        display: block;
+    }
+
+    button {
+        padding: 15px 32px;
+        font-size: 20px;
+        min-width: 300px;
+        min-height: 100px;
+        border-radius: 50px;
+    }
+}

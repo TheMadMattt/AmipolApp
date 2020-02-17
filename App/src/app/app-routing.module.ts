@@ -1,18 +1,18 @@
 import { AuthGuard } from './guards/auth.guard';
-import { LoginComponent } from './core/login/login.component';
-import { SalesComponent } from './core/sales/sales.component';
-import { HomeComponent } from './core/home/home.component';
-import { AdminComponent } from './core/admin/admin.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from './core/home/home.component';
+import { SalesComponent } from './core/sales/sales.component';
+import { AdminComponent } from './core/admin/admin.component';
+import { LoginComponent } from './core/login/login.component';
 
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
+  { path: '', component: HomeComponent },
   { path: 'promocje', component: SalesComponent},
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent},
-  { path: '', redirectTo: '/home', pathMatch: 'full' }
+  { path: '', redirectTo: '/', pathMatch: 'full' }
 ];
 
 @NgModule({

@@ -46,9 +46,18 @@ namespace AmipolAPI
 
             app.UseAuthorization();
 
+            var imgPath = Path.Combine(Directory.GetCurrentDirectory(), "urls/images");
+
+            var exists = Directory.Exists(imgPath);
+
+            if (!exists)
+            {
+                Directory.CreateDirectory(imgPath);
+            }
+
             app.UseStaticFiles(new StaticFileOptions
             {
-                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "urls/images")), 
+                FileProvider = new PhysicalFileProvider(imgPath), 
                 RequestPath = "/urls/images"
             });
 

@@ -4,7 +4,7 @@
       <div fxLayout="column" fxLayoutAlign="center center" fxFlex>
         <div fxLayoutAlign="center center" fxFlex>
           <div *ngIf="currentItem.imageUrl" fxLayoutAlign="center center">
-            <img [src]="currentItem.imageUrl" />
+            <img [src]="currentItem.imageUrl | safe: 'url'" />
           </div>
           <div *ngIf="!currentItem.imageUrl" fxLayoutAlign="center center">
             <img src="assets/noImage.png" width="500" />
@@ -15,21 +15,21 @@
         </div>
       </div>
       <div fxLayout="column" fxFlex>
-        <div class="five" fxFlex fxFlexFill fxLayoutAlign="center center">
+        <div fxFlex fxFlexFill fxLayoutAlign="center center">
           <h1 align="center">{{ currentItem.nazwa }}</h1>
         </div>
         <div fxLayout fxLayoutAlign="center center" fxFlex>
           <div fxFlex fxFlexFill fxLayoutAlign="center center">
             <div fxLayout="column">
               <h2 align="center">Taniej o:</h2>
-              <h1 style="font-size: 70pt;" align="center">{{ roundDiscount(currentItem.rabat) }}%</h1>
+              <h1 class="salesFont">{{ roundDiscount(currentItem.rabat) }}%</h1>
             </div>
           </div>
           <div fxFlex fxLayoutAlign="center center" fxFlexFill>
             <div class="container">
-              <img src="assets/promo-star.png" style="max-height: 600px;">
+              <img src="assets/promo-star.png">
               <div class="centered">
-                <h1 style="font-size: 70pt;" align="center">
+                <h1 class="salesFont">
                   {{ currentItem.cena | currency:'PLN' }}</h1>
                 <h1>/{{currentItem.jm}}</h1>
               </div>

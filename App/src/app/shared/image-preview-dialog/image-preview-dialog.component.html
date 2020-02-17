@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>{{ data.itemName }}</h1>
 <div mat-dialog-content>
-    <img class="container" [src]="data.imageUrl" width="500px">
+    <img class="container" [src]="data.imageUrl | safe: 'url'" width="500px">
 </div>
 <div mat-dialog-actions align="end">
     <button mat-button (click)="onNoClick()" cdkFocusInitial>Ok</button>

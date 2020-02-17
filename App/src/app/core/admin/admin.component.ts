@@ -1,6 +1,5 @@
 import { ImagePreviewDialogComponent } from './../../shared/image-preview-dialog/image-preview-dialog.component';
 import { Component, OnInit, AfterViewInit, ViewChild, OnDestroy } from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatDialog } from '@angular/material';
 import { Subscription, timer } from 'rxjs';
 import { tap, switchMap } from 'rxjs/operators';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -16,11 +15,14 @@ import { Cennik } from 'src/app/models/cennik';
 import { SalesSettings } from 'src/app/models/salesSettings';
 import { Settings } from 'src/app/models/settings';
 import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css'],
+  styleUrls: ['./admin.component.scss'],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({ height: '0px', minHeight: '0' })),
@@ -42,13 +44,13 @@ export class AdminComponent implements OnInit, AfterViewInit, OnDestroy {
   message: string;
   searchValue: string;
 
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private uiService: UiService,
-    private apiService: ApiService,
-    private imageService: ImageService,
-    private settingsService: SettingsService,
-    private dialog: MatDialog) { }
+              private apiService: ApiService,
+              private imageService: ImageService,
+              private settingsService: SettingsService,
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
     registerLocaleData(localePL, 'pl');
@@ -160,6 +162,7 @@ export class AdminComponent implements OnInit, AfterViewInit, OnDestroy {
           this.progress = Math.round(100 * event.loaded / event.total);
         } else if (event.type === HttpEventType.Response) {
           this.message = 'Obrazek został załadowany';
+          // tslint:disable-next-line: no-string-literal
           this.promocje.find(x => x.index === itemIndex).imageUrl = event.body['imageUrl'];
         }
       });

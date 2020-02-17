@@ -4,7 +4,7 @@ import { Component, Inject } from '@angular/core';
 @Component({
     selector: 'app-spinner',
     templateUrl: './spinner.html',
-    styleUrls: ['./spinner.css'],
+    styleUrls: ['./spinner.scss'],
 })
 
 export class SpinnerComponent {

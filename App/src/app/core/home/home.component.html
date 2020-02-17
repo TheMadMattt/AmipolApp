@@ -1,1 +1,20 @@
-<p>home works!</p>
+<mat-grid-list class="mobile" cols="1" rowHeight="2:1">
+    <mat-grid-tile>
+        <button type="button" mat-raised-button routerLink="/login" *ngIf="!currentUser">
+            Zaloguj się
+        </button>
+        <button type="button" mat-raised-button (click)="logout()" *ngIf="currentUser">
+            Wyloguj się
+        </button>
+    </mat-grid-tile>
+    <mat-grid-tile *ngIf="currentUser">
+        <button type="button" mat-raised-button routerLink="/admin">
+            Panel admina
+        </button>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <button type="button" mat-raised-button routerLink="/promocje">
+            Promocje
+        </button>
+    </mat-grid-tile>
+</mat-grid-list>

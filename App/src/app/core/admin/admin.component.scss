@@ -1,0 +1,116 @@
+table {
+  width: 100%;
+}
+
+button{
+  margin-bottom: 10px;
+}
+
+span {
+  margin: 10px;
+}
+
+.mobile {
+  display: none;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: lightgray;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: white;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.item-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.upload {
+  margin: 10px;
+}
+
+.searchSize {
+  width: 300px
+}
+
+.mat-header-cell.cdk-header-cell.cdk-column-state {
+  text-align: center;
+}
+
+.mat-cell.cdk-cell.cdk-column-state {
+  text-align: center;
+}
+
+@media only screen and (max-width: 500px) {
+  .mat-column-waznosc{
+    display: none;
+  }
+
+  button{
+    margin-bottom: 0px;
+  }
+
+  span {
+    margin: 0px;
+  }
+
+  .desktop {
+    display: none;
+  }
+
+  button {
+    margin: 5px;
+    height: 50px;
+  }
+
+  .mobile {
+    display: block;
+  }
+
+  .mat-column-promocja {
+    display: none;
+  }
+
+  .mat-column-jm {
+    display: none;
+  }
+
+  .mat-column-index {
+    display: none;
+  }
+
+  .mat-column-stan {
+    display: none;
+  }
+
+   .mat-column-rabat {
+    display: none;
+  }
+
+  .mat-column-nazwa{
+    padding: 15px;
+    word-wrap: break-word !important;
+  }
+
+  .mat-header-cell {
+    padding: 10px;
+  }
+
+  .mat-cell.cdk-cell.cdk-column-hasImage {
+    text-align: center;
+  }
+
+  .mat-cell.cdk-cell.cdk-column-cena {
+    text-align: center;
+  }
+}

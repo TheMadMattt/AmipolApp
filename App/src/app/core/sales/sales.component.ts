@@ -37,7 +37,7 @@ export class IfChangesDirective {
 @Component({
   selector: 'app-sales',
   templateUrl: './sales.component.html',
-  styleUrls: ['./sales.component.css'],
+  styleUrls: ['./sales.component.scss'],
   animations: [
     trigger('saleAnimation', [
       transition('void => *', [
@@ -61,8 +61,8 @@ export class SalesComponent implements OnInit, OnDestroy {
   saleDuration = 5;
 
   constructor(private uiService: UiService,
-    private apiService: ApiService,
-    private settingsService: SettingsService) { }
+              private apiService: ApiService,
+              private settingsService: SettingsService) { }
 
   ngOnInit() {
     registerLocaleData(localePL, 'pl');
